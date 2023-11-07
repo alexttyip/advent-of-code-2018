@@ -17,13 +17,12 @@ fn read_input() -> InputType {
 
 fn part1(input: InputType) -> Int {
     let (twos, threes) = input.iter().fold((0, 0), |(twos, threes), s| {
-        let counts: Vec<(usize, char)> = s.chars()
-            .sorted_unstable()
-            .dedup_with_count()
-            .collect();
+        let counts: Vec<(usize, char)> = s.chars().sorted_unstable().dedup_with_count().collect();
 
-        (twos + Int::from(counts.iter().any(|(count, _)| count == &2)),
-         threes + Int::from(counts.iter().any(|(count, _)| count == &3)))
+        (
+            twos + Int::from(counts.iter().any(|(count, _)| count == &2)),
+            threes + Int::from(counts.iter().any(|(count, _)| count == &3)),
+        )
     });
 
     twos * threes

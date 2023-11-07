@@ -33,7 +33,7 @@ fn read_input() -> InputType {
                         });
                     }
                     _ => {
-                        curr_guard = (&message.split_whitespace().nth(1).unwrap()[1..])
+                        curr_guard = message.split_whitespace().nth(1).unwrap()[1..]
                             .parse()
                             .unwrap();
 

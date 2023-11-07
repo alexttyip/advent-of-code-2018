@@ -44,16 +44,15 @@ fn part1(input: InputType) -> Int {
     for claim in input {
         for x in claim.x..(claim.x + claim.dx) {
             for y in claim.y..(claim.y + claim.dy) {
-                fabric.entry((x, y))
+                fabric
+                    .entry((x, y))
                     .and_modify(|count| *count += 1)
                     .or_insert(1);
             }
         }
     }
 
-    fabric.values()
-        .filter(|&&value| value >= 2)
-        .count()
+    fabric.values().filter(|&&value| value >= 2).count()
 }
 
 fn part2(input: InputType) -> usize {

@@ -1,7 +1,8 @@
-use itertools::Itertools;
 use std::collections::{BTreeMap, BTreeSet, HashSet};
 use std::fs;
 use std::time::Instant;
+
+use itertools::Itertools;
 
 type Int = u32;
 type InputType = BTreeMap<char, BTreeSet<char>>;
@@ -55,7 +56,7 @@ fn get_steps(mut map: InputType, mut seen: Vec<char>) -> Vec<char> {
         v.retain(|&v| v != curr);
     });
 
-    return get_steps(map, seen);
+    get_steps(map, seen)
 }
 
 fn part1(input: InputType) -> String {
@@ -77,8 +78,9 @@ fn part2(mut input: InputType) -> Int {
     let mut workers = [('¡', 0); NUM_WORKERS];
 
     for i in 0.. {
-        for j in 0..NUM_WORKERS {
-            let (job, job_until) = workers[j];
+        // for j in 0..NUM_WORKERS {
+        for (job, job_until) in workers.into_iter() {
+            // let (job, job_until) = workers[j];
 
             if done_jobs.contains(&job) {
                 continue;
@@ -92,13 +94,14 @@ fn part2(mut input: InputType) -> Int {
                 });
             }
         }
+
         for job in get_available_steps(&input) {
-            for j in 0..NUM_WORKERS {
-                if workers[j].1 > i {
+            for worker in workers.iter_mut() {
+                if worker.1 > i {
                     continue;
                 }
 
-                workers[j] = (job, job as Int - 4 + i);
+                *worker = (job, job as Int - 4 + i);
                 input.remove(&job);
 
                 break;

@@ -22,11 +22,14 @@ fn part2(_input: InputType) -> Int {
 }
 
 pub fn main() {
-    let input = read_input();
-
     let mut now = Instant::now();
+    let input = read_input();
+    let input_elapsed = now.elapsed();
+
+    now = Instant::now();
     let part1 = part1(input.clone());
     let part1_elapsed = now.elapsed();
+
     now = Instant::now();
     let part2 = part2(input);
     let part2_elapsed = now.elapsed();
@@ -34,6 +37,7 @@ pub fn main() {
     println!("--- Day 00 ---");
     println!("Part 1: {}", part1);
     println!("Part 2: {}", part2);
+    println!("Reading input took: {:.2?}", input_elapsed);
     println!("Part 1 took: {:.2?}", part1_elapsed);
     println!("Part 2 took: {:.2?}", part2_elapsed);
 
